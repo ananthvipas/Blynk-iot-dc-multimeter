@@ -1,6 +1,5 @@
 # Blynk-iot-dc-multimeter
 
-Sure, let's go through the code line by line:
 
 ```cpp
 #define BLYNK_TEMPLATE_ID "TMPL35bnLsw5L"
@@ -80,12 +79,43 @@ void readAndSendDataToBlynk()
 ```
 This function is responsible for reading sensor data from the INA219 sensor and calculating various parameters like load voltage, power, energy, capacity, and energy cost. It then sends this data to the Blynk app using virtual pins.
 
+Sure, let's explain the `displaydata()` function line by line:
+
 ```cpp
 void displaydata()
 {
-  // Update the OLED display with the calculated data
-}
+  display.clearDisplay();
+  display.setTextColor(WHITE);
+  display.setTextSize(1);
+  display.setCursor(0, 5);     //Screen alignment point
+  display.print(loadvoltage, 2);
+  display.print(" V");
 ```
-This function updates the OLED display with the calculated data. It shows load voltage, current, power, energy consumption, capacity, and energy cost on the OLED display.
+In this part of the code, the function `displaydata()` is defined. It starts by clearing the OLED display and setting the text color to white. It then sets the text size to 1 (normal size) and sets the cursor position to (0, 5), which is the starting point for displaying data on the OLED screen. It prints the `loadvoltage` variable with 2 decimal places followed by the text " V".
+
+```cpp
+// CURRENT
+  if (current > 1000)
+  {
+    display.setCursor(60, 5);     //Screen alignment point
+    display.print((current / 1000), 2);
+    display.println(" A");
+    display.setCursor(0, 15);     //Screen alignment point
+    display.println("--------------------");
+  }
+  else
+  {
+    display.setCursor(60, 5);   //Screen alignment point
+    display.print(current, 1);
+    display.println(" mA");
+    display.setCursor(0, 15);     //Screen alignment point
+    display.println("--------------------");
+  }
+```
+This part of the code handles displaying the current value on the OLED screen. If the current value is greater than 1000 (mA), it means the value is in Amperes (A), so it sets the cursor position to (60, 5) and prints the current value divided by 1000 with 2 decimal places (to convert it to Amperes) followed by the text " A". It then sets the cursor position to (0, 15) and prints a line of dashes "--------------------" as a separator.
+
+If the current value is less than or equal to 1000 (mA), it means the value is in milliamperes (mA). So, it sets the cursor position to (60, 5) and prints the current value with 1 decimal place followed by the text " mA". It then sets the cursor position to (0, 15) and prints the same separator line "--------------------".
+
+The purpose of this code is to display the load voltage and current on the OLED screen. If the current is greater than 1000 mA, it is displayed in Amperes (A); otherwise, it is displayed in milliamperes (mA). The separator line helps distinguish between different data on the OLED screen.
 
 The `loop()` function calls these two functions to continuously update the Blynk app and OLED display with the latest sensor data.
