@@ -1,7 +1,7 @@
 # Blynk-iot-dc-multimeter
 
 #Blynk DashBoard
-
+![Blynk DashBoard](<Image/Blynk dashboard.png>)
 
 ```cpp
 #define BLYNK_TEMPLATE_ID "TMPL35bnLsw5L"
