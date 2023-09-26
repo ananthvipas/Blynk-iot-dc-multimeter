@@ -7,7 +7,7 @@
 
 #define BLYNK_TEMPLATE_ID "TMPL35bnLsw5L"
 #define BLYNK_TEMPLATE_NAME "DCpowerMETER"
-#define BLYNK_FIRMWARE_VERSION        "0.1.0"
+#define BLYNK_FIRMWARE_VERSION "0.1.0"
 
 #include <Wire.h>
 #include <Adafruit_INA219.h>
